@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Comment finder</title>
+</head>
+<body>
+	<p id="text">
+		Lorem ipsum dolor sit amet, 
+		//consectetur adipisicing elit.<br>
+		Nostrum consectetur porro atque eius, voluptate magnam iusto eaque dolore doloribus, error, hic expedita. /*Reiciendis maiores vitae */ deleniti officia, eius quae quia!
+	</p>
+	<script>
+		var text = document.getElementById("text").innerText;
+		var cmntPattern = /(\/\/[a-zA-Z0-9 \t.,\!\`\~\@\$\%\^\&\*\(\)\-\_\=\+\[\]\{\}\#\<\>\?]*\n)|(\/\*[a-zA-Z0-9 \t.,\!\`\~\@\$\%\^\&\*\(\)\-\_\=\+\[\]\{\}#<>?\n]*\*\/)/gmi;
+		let m;
+		while((m=cmntPattern.exec(text)) !== null){
+			if(m.index == cmntPattern.lastIndex){
+				cmntPattern.lastIndex++;
+			}
+			console.log(m["index"],m[0]);
+		}
+
+	</script>
+</body>
+</html>

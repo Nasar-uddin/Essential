@@ -1,0 +1,90 @@
+<html>
+<head>
+	<title>Rgular expression</title>
+</head>
+<body>
+	<div id="test">public static int</div>
+	<script>
+		var text= document.getElementById("test").innerText;
+		// check(text);
+		function check(word){
+			const keyWord = ["abstract","arguments","boolean",
+				"break","public","protected","private",
+				"byte","case","catch","char",
+				"const","continue","debugger","default",
+				"delete","do","double","else",
+				"eval",	"false","final","finally",
+				"float","for","function","goto",
+				"if","implements","in","instanceof",
+				"int","interface","let","long",
+				"native","new","null","package",
+				"return","short","static","switch",
+				"synchronized",
+				"this","throw","throws","transient",
+				"true","try","typeof","var",
+				"void","volatile","while","with",
+				"yield"];
+			for(i=0;i<keyWord.length;i++){
+				if(word==keyWord[i]){
+					// console.log(word+" is a keyword");
+					return true;
+				}
+			}
+			// console.log("This is not a keyword");
+			return false;
+		}
+		function pairCheck(word){
+			var flag = 0;
+			const pair = {
+				"static":[
+					"int",
+					"float",
+					"double",
+					"long",
+					"String",
+					"function",
+					"void"
+				],
+				"public":[
+					"int",
+					"float",
+					"long",
+					"double",
+					"String",
+					"static"
+				]
+			}
+			var words = word.split(" ");
+			// check every work is a valid keywork
+			words.forEach(function(w){
+				if(!check(w)){
+					console.log("Keyword is not valid");
+					return false;
+				}
+			})
+			// if all keywork is valid then check for pair
+			Object.keys(pair).forEach(function(key){
+				if(words[0]===key){
+					words.shift();
+					for(var i=0;i<pair[key].length;++i){
+						if(pair[key][i]===words[0]){
+							console.log(word+" is key word");
+							flag=1;
+							break;
+						}
+					}
+					if(flag==0){
+						// return false if not a pair keywork
+						console.log(word+" is not a key word");
+						return false;
+					}else
+					// return true if it is a pair keywork
+						return true;
+
+				}
+			});
+		}
+		pairCheck(text);
+	</script>
+</body>
+</html>
